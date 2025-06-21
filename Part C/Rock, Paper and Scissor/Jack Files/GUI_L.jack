@@ -1,0 +1,57 @@
+class GUI_L {
+function void draw_L(int player){
+    if (player = 0) {
+    
+        do Output.printString(" ROCK");
+        do Output.println();
+        do Output.printString("  _____________");
+        do Output.println();
+        do Output.printString("          |____)__");
+        do Output.println();
+        do Output.printString("          (________)");
+        do Output.println();
+        do Output.printString("          (________)");
+        do Output.println();
+        do Output.printString("          (________)");
+        do Output.println();
+        do Output.printString("  __________(______)");
+        do Output.println();
+    }
+    if (player = 1){
+
+        do Output.printString(" PAPER");
+        do Output.println();
+        do Output.printString("   _________");
+        do Output.println();
+        do Output.printString("___|    ____)____");
+        do Output.println();
+        do Output.printString("        (__________)");
+        do Output.println();
+        do Output.printString("        (____________)");
+        do Output.println();
+        do Output.printString("        (__________)");
+        do Output.println();
+        do Output.printString("_______,_______");
+        do Output.println();
+        }
+
+    if (player = 2){
+        do Output.printString(" SCISSOR");
+        do Output.println();
+        do Output.printString("   _________");
+        do Output.println();
+        do Output.printString("__|    ____)__________");
+        do Output.println();
+        do Output.printString("       (_______________)");
+        do Output.println();
+        do Output.printString("       (_______________)");
+        do Output.println();
+        do Output.printString("       (______)");
+        do Output.println();
+        do Output.printString("_____(___)");
+        do Output.println();
+        }
+      
+        return;
+    }
+}

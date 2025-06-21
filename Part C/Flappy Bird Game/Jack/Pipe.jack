@@ -1,0 +1,126 @@
+
+class Pipe {
+   static int xvelocity;
+   static int fixedgap;
+ 
+   field int xposition;
+   field int yposition;
+   field int time; // internal clock
+   field boolean pass; // passed Bird?
+
+   
+function void create(int x, int y) {
+      let xvelocity = x;
+      let fixedgap = y;
+      return;
+   }
+
+   constructor Pipe new(int x, int y) {
+    
+      let xposition = x;
+      let yposition = y;
+      let time = -1;
+      let pass = true;
+      return this;
+  
+   }
+
+   method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+   }
+
+
+method void draw(){
+
+     
+      do Screen.setColor(true);
+  
+      do Screen.drawRectangle(Math.min(Math.max(xposition-2,0),511), yposition+30, Math.min(Math.max(xposition+44,0),511), yposition+31);  
+      do Screen.drawRectangle(Math.min(Math.max(xposition-2,0),511), yposition+54, Math.min(Math.max(xposition+44,0),511), yposition+55);  
+      do Screen.drawRectangle(Math.min(Math.max(xposition-2,0),511), yposition+30, Math.min(Math.max(xposition-1,0),511), yposition+54);  
+      do Screen.drawRectangle(Math.min(Math.max(xposition+44,0),511), yposition+30, Math.min(Math.max(xposition+45,0),511), yposition+55); 
+
+      
+      do Screen.drawRectangle(Math.min(Math.max(xposition,0),511), yposition+54, Math.min(Math.max(xposition+1,0),511), 255);         
+      do Screen.drawRectangle(Math.min(Math.max(xposition+42,0),511), yposition+54, Math.min(Math.max(xposition+43,0),511), 255);     
+
+     
+      do Screen.drawRectangle(Math.min(Math.max(xposition-2,0),511), yposition+(-fixedgap), Math.min(Math.max(xposition+45,0),511), yposition+(-(fixedgap-1)));  
+      do Screen.drawRectangle(Math.min(Math.max(xposition-2,0),511), yposition+(-(fixedgap+25)), Math.min(Math.max(xposition+45,0),511), yposition+(-(fixedgap+24))); 
+      do Screen.drawRectangle(Math.min(Math.max(xposition-2,0),511), yposition+(-(fixedgap+23)), Math.min(Math.max(xposition-1,0),511), yposition+(-fixedgap));       
+      do Screen.drawRectangle(Math.min(Math.max(xposition+44,0),511), yposition+(-(fixedgap+25)), Math.min(Math.max(xposition+45,0),511), yposition+(-fixedgap));     
+
+      
+      do Screen.drawRectangle(Math.min(Math.max(xposition,0),511), 0, Math.min(Math.max(xposition+1,0),511), yposition+(-(fixedgap+25))); 
+      do Screen.drawRectangle(Math.min(Math.max(xposition+42,0),511), 0, Math.min(Math.max(xposition+43,0),511), yposition+(-(fixedgap+25)));
+
+
+      do Screen.setColor(false);
+     
+      do Screen.drawRectangle(Math.min(Math.max(xposition,0),511), yposition+32, Math.min(Math.max(xposition+(1+xvelocity),0),511), yposition+53);       
+      do Screen.drawRectangle(Math.min(Math.max(xposition+46,0),511), yposition+30, Math.min(Math.max(xposition+(48+xvelocity),0),511), yposition+55);   
+      do Screen.drawRectangle(Math.min(Math.max(xposition+2,0),511), yposition+56, Math.min(Math.max(xposition+(4+xvelocity),0),511), 255);         
+      do Screen.drawRectangle(Math.min(Math.max(xposition+44,0),511), yposition+56, Math.min(Math.max(xposition+(46+xvelocity),0),511), 255);     
+ 
+      do Screen.drawRectangle(Math.min(Math.max(xposition,0),511), yposition+(-(fixedgap+23)), Math.min(Math.max(xposition+1,0),511), yposition+(-(fixedgap+1)));   
+      do Screen.drawRectangle(Math.min(Math.max(xposition+46,0),511), yposition+(-(fixedgap+25)), Math.min(Math.max(xposition+47,0),511), 1+(yposition+(-fixedgap))); 
+      do Screen.drawRectangle(Math.min(Math.max(xposition+2,0),511), 0, Math.min(Math.max(xposition+3,0),511), yposition+(-(fixedgap+26)));                 
+      do Screen.drawRectangle(Math.min(Math.max(xposition+44,0),511), 0, Math.min(Math.max(xposition+45,0),511), yposition+(-(fixedgap+25)));             
+
+
+return;
+}
+
+
+   method void updpipe() {
+      let time = time + 1; 
+
+      if (time = 5) {
+         let time = 0;
+      } else {
+         let xposition = xposition - xvelocity;
+
+         if (xposition < (-50)) {
+            let pass = true;
+            let xposition = 514;
+            let yposition = LCGRandom.randRange(80,194);
+         } 
+
+         if (xposition > 614) {
+            let yposition = LCGRandom.randRange(80,194);
+         }
+      }
+      return;
+   }
+
+   method void update() {
+      do updpipe();
+      do draw();
+      return;
+   }
+
+   method int x() {
+      return xposition;
+   }
+
+   method int y() {
+      return yposition;
+   }
+
+   method int gameover(int x, int y) {
+      if ((x>(xposition-32))&(x<(xposition+40))) { 
+         if ((y>yposition)|(y<(yposition-(fixedgap+6)))) { 
+            return 2; 
+         }
+         if (pass) {
+            let pass = false; 
+            return 1; 
+         }
+         else {return 0;} 
+      }
+      return 0; 
+   }
+
+  
+}

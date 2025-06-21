@@ -1,0 +1,364 @@
+class Single{
+    method void run(){
+            var Array row1,row2,row3;
+            var Array board1;
+            var boolean Game_Over,win1,win2;
+            var int player,location,row,col,i,j,k,computer,temp;
+            var Setup set;
+
+            let Game_Over = false;
+            let player = 1;
+
+            let row1 = Array.new(3);
+            let row2 = Array.new(3);
+            let row3 = Array.new(3);
+            let board1 = Array.new(3);
+
+            let row1[0] = 0;
+            let row1[1] = 0;
+            let row1[2] = 0;
+            let row2[0] = 0;
+            let row2[1] = 0;
+            let row2[2] = 0;
+            let row3[0] = 0;
+            let row3[1] = 0;
+            let row3[2] = 0;
+            let board1[0] = row1;
+            let board1[1] = row2;
+            let board1[2] = row3;
+
+            let computer = get();
+            let player = 1;
+
+        while(~(Game_Over)){
+            if(player = computer){
+                let location = move(board1,player,computer);
+
+                if(player = 1){
+                    do set.draw_x(location);
+                }
+                else{
+                    do set.draw_o(location);
+                }
+
+                let location = location-1;  
+                let row = location/3;
+                let col = location - (3  * (location/3));
+                let board1 = set.set_board(board1,row,col,player);
+
+                let Game_Over = set.check(board1,player);
+
+                if(player = 1){
+                    let player = 2;
+                }
+                else{
+                    let player = 1;
+                }
+            }
+            else{
+                let location = Keyboard.readInt("Your turn (Enter a number between 1 to 9) : ");
+                do set.clear_line();
+
+                if((location<10) & (location>0)){
+
+                let location = location-1;  
+                let row = location/3;
+                let col = location - (3  * (location/3));
+
+                    if(set.board(board1,row,col) = 0){
+
+                        let location = location+1;
+                        let board1 = set.set_board(board1,row,col,player);
+
+                        if(player = 1){
+                            do set.draw_x(location);
+                        }
+                        else{
+                            do set.draw_o(location);
+                        }
+
+                        let Game_Over = set.check(board1,player);
+
+                        if(player = 1){
+                            let player = 2;
+                        }
+                        else{
+                            let player = 1;
+                        }
+                    }
+                    else{
+                        do Output.printString("ERROR : The entered location is already used");
+                        do Sys.wait(2000);
+                        do set.clear_line();
+                    }
+
+                }
+                else{
+                    do Output.printString("ERROR : Enter a valid location");
+                    do Sys.wait(2000);
+                    do set.clear_line();
+                }
+            }
+
+            
+        }
+
+        if(computer = 2){
+            let temp = 1;
+        }
+        else{
+            let temp = 2;
+        }
+
+        let win1 = set.win(board1,computer);
+        let win2 = set.win(board1,temp);
+        do Output.printString(" GAME OVER !!!    ");
+
+        do Screen.setColor(false);
+        do Screen.drawRectangle(0,12,511,240);
+        do Output.moveCursor(11,20);
+
+        if(win1){
+            do Output.printString("OOPS!!! You have lost the game");
+            return;
+        }
+
+        do Output.moveCursor(11,17);
+
+        if(win2){
+            do Output.printString("Congragulations!!! You have won the game");
+            return;
+        }
+
+        do Output.moveCursor(11,25);
+        do Output.printString("GAME : DRAW");
+        
+        return;
+    }
+
+    method int get(){
+        var int computer;
+        var Setup set;
+
+        let computer = Keyboard.readInt("Do you want to play as x(1) or o(2) : ");
+        do set.clear_line();
+
+        if(computer = 1){
+            let computer = 2;
+        }
+        else{
+            if(computer = 2){
+                let computer = 1;
+            }
+            else{
+                do Output.printString("Please enter a valid number");
+                do Sys.wait(2000);
+                do set.clear_line();
+                let computer = get();
+            }
+        }
+
+        return computer;
+    }
+
+        method int move(Array board2,int player,int computer){
+            var int temp,i,j,location,k;
+            var Setup set;
+
+            do Output.printString(" Thinking...");
+
+            if(computer = 1){
+                let temp = 2;
+            }
+            else{
+                let temp = 1;
+            }
+
+            let i=0;
+            let j=0;
+            while(~(i=3)){
+                let j=0;
+                while(~(j=3)){
+                    if(set.board(board2,i,j) = 0){
+                        let board2 = set.set_board(board2,i,j,computer);
+                        if(set.win(board2,computer)){
+                            let location = ((i*3)+j)+1;
+                            return location;
+                        }
+                        let board2 = set.set_board(board2,i,j,0);
+                    }
+                    let j = j+1;
+                }
+                let i = i+1;
+            }
+
+            let i=0;
+            let j=0;
+            while(~(i=3)){
+                let j=0;
+                while(~(j=3)){
+                    if(set.board(board2,i,j) = 0){
+                        let board2 = set.set_board(board2,i,j,temp);
+                        if(set.win(board2,temp)){
+                            let location = ((i*3)+j)+1;
+                            return location;
+                        }
+                        let board2 = set.set_board(board2,i,j,0);
+                    }
+                    let j = j+1;
+                }
+                let i = i+1;
+            }
+
+            let i = 0;
+            let j = 0;
+            let k = 0;
+            while(~(i=3)){
+                let j=0;
+                while(~(j=3)){
+                    if(set.board(board2,i,j) = 0){
+                        let k = k+1;
+                    }
+                    let j = j+1;
+                }
+                let i = i+1;
+            }
+
+            let location = gekko(board2,k,player,computer);
+            do set.clear_line();
+            do Output.moveCursor(0,0);
+            return location;
+        }
+
+    method int gekko(Array board1,int k,int player,int computer){
+        var int location,i,j,k1,pos,max,index;
+        var Array values;
+        var Setup set;
+
+        let values = Array.new(k);
+
+        let k1 = 0;
+
+        let i=0;
+        let j=0;
+        while(~(i=3)){
+            let j=0;
+            while(~(j=3)){
+                if(set.board(board1,i,j) = 0){
+                    let board1 = set.set_board(board1,i,j,player);
+                    let pos = possibility(board1,player,computer);
+                    let values[k1] = pos;
+                    let k1 = k1+1;
+                    let board1 = set.set_board(board1,i,j,0);
+                }
+                let j = j+1;
+            }
+            let i = i+1;
+        }
+
+        let max = values[0];
+        let index = 0;
+
+        let i = 0;
+        while(~(i=k)){
+
+            if(max < values[i]){
+                let max = values[i];
+                let index = i;
+            }
+
+            let i = i + 1;
+        }
+
+        let i = 0;
+        let j=0;
+        let k1=0;
+
+        while(~(i=3)){
+            let j=0;
+            while(~(j=3)){
+                if(set.board(board1,i,j) = 0){
+                    if(k1=index){
+                        let location = ((i*3)+j) + 1;
+                        return location;
+                    }
+                    let k1 = k1+1;
+                }
+                let j = j+1;
+            }
+            let i = i+1;
+        }
+
+        return 0;
+    }
+
+    method int possibility(Array board1,int player,int computer){
+        var int i,j,k,temp,pos;
+        var Setup set;
+        
+        let i = 0;
+        let j = 0;
+        let k = 0;
+        while(~(i=3)){
+            let j=0;
+            while(~(j=3)){
+                if(~(set.board(board1,i,j) = 0)){
+                    let k = k+1;
+                }
+                let j = j+1;
+            }
+            let i = i+1;
+        }
+
+        if(k=9){
+
+            if(computer = 1){
+                let temp = 2;
+            }
+            else{
+                let temp = 1;
+            }
+
+            if(set.win(board1,computer)){
+                return 1;
+            }
+            else{
+                if(set.win(board1,temp)){
+                    return -1;
+                }   
+                else{
+                    return 0;
+                }
+            }
+        }
+        else{
+
+            if(player = 1){
+                let player = 2;
+            }
+            else{
+                let player = 1;
+            }
+
+            let pos=0;
+
+            let i = 0;
+            let j = 0;
+            
+            
+            
+            
+            
+               
+            
+            
+            
+            
+            
+            
+
+            
+
+            
+    }
+}

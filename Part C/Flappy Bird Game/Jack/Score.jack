@@ -1,0 +1,78 @@
+class Score {
+   field int total;
+   field int v1;
+   field int v2;
+   field int v3;
+
+ constructor Score new() {
+      do reset();
+      return this;
+   }
+
+   method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+   }
+
+ 
+  method void render(int x, int v) {
+      if (v = 0) {do Flappy.draw_digit0(x+512);} else { 
+      if (v = 1) {do Flappy.draw_digit1(x+512);} else { 
+      if (v = 2) {do Flappy.draw_digit2(x+512);} else { 
+      if (v = 3) {do Flappy.draw_digit3(x+512);} else { 
+      if (v = 4) {do Flappy.draw_digit4(x+512);} else { 
+      if (v = 5) {do Flappy.draw_digit5(x+512);} else { 
+      if (v = 6) {do Flappy.draw_digit6(x+512);} else { 
+      if (v = 7) {do Flappy.draw_digit7(x+512);} else { 
+      if (v = 8) {do Flappy.draw_digit8(x+512);} else { 
+      if (v = 9) {do Flappy.draw_digit9(x+512);} else { 
+      }}}}}}}}}}
+      return;
+   }
+
+   
+   method void show() {
+      if (total > 99) {
+         do render(16,v1);
+         do render(14,v2);
+         do render(12,v3);
+      } else {
+         if (total > 9) {
+            do render(16,v1);
+            do render(14,v2);
+         }
+         else {
+            if (total > 0) {do render(15,v1);}
+         }
+      }
+      return;
+   }
+
+
+   method void increment() {
+      let total = total + 1;
+      let v1 = v1 + 1;
+      if (v1 > 9) {
+         let v1 = 0;
+         let v2 = v2 + 1;
+         if (v2 > 9) {
+            let v2 = 0;
+            let v3 = v3 + 1;
+         }
+      }
+      return;
+   }
+
+   method int value() {
+      return total;
+   }
+
+   method void reset() {
+      let v1 = 0;
+      let v2 = 0;
+      let v3 = 0;
+      let total = 0;
+      return;
+   }
+
+}

@@ -1,0 +1,177 @@
+class Main {
+
+    function void main(){
+    var int player1;
+    var int player2;
+    var int sets;
+    var int pl1score;
+    var int pl2score; 
+    var int tiescore;
+    var int a;
+
+    let pl1score = 0;
+    let pl2score = 0;
+    let tiescore = 0;
+    do Output.moveCursor(3,12);
+    do Output.printString("ROCK-PAPER-SCISSOR");
+    do Output.moveCursor(6,22);
+    let sets = Keyboard.readInt("How many sets: ");
+
+  let a=1;
+    while((sets > a) | (sets = a)){
+
+            do Screen.clearScreen();
+            do Output.moveCursor(0,0);
+
+            let a = a+1;
+                do Output.moveCursor(0, 15);
+                do Output.printString("-- PLAYERS CHOICES -"); 
+                do Output.println();
+                do Output.moveCursor(3, 12);
+                do Output.printString(" 0 - ROCK || 1 - PAPER || 2- SCISSOR");
+                do Output.println();
+                do Output.moveCursor(5, 0);
+                do Output.printString(" GAME SET: "); 
+                do Output.printInt(a - 1);
+                do Output.println();
+                do Output.println(); 
+                do Output.moveCursor(7, 22);
+                let player1 =  Keyboard.readInt("PLAYER 1 PICK : ");
+                
+                do Screen.clearScreen();
+                do Output.moveCursor(0, 15);
+                do Output.printString("-- PLAYERS CHOICES ---");
+                do Output.println();
+                do Output.moveCursor(3, 12);
+                do Output.printString("0 - ROCK || 1 - PAPER || 2 - SCISSOR");
+                do Output.println();
+                do Output.moveCursor(5, 0); 
+                do Output.printString(" GAME SET: ");
+                do Output.printInt(a - 1);
+                do Output.println();
+                do Output.println();
+                do Output.moveCursor(7, 22);
+              let player2 = Keyboard.readInt("PLAYER 2 PICK: ");
+             
+
+              do Screen.clearScreen(); 
+              do Output.moveCursor(6, 0);
+              do GUI_L.draw_L(player1);
+              do Output.moveCursor(6, 32);
+              do GUI_R.draw_R(player2);
+              do Output.println();
+              do Output.moveCursor(18, 20);
+              if((player1 = 0)&(player2 = 0)){
+                  do Output.printString("it's a tie");
+                  let tiescore = tiescore + 1;
+              }
+              if((player1 = 1)&(player2 = 1)){
+                  do Output.printString("it's a tie");
+                  let tiescore = tiescore + 1;
+              }
+              if((player1 = 2)&(player2 = 2)){ 
+                  do Output.printString("it's a tie");
+                  let tiescore = tiescore + 1;
+              }
+
+              if((player1 = 0)&(player2 = 1)){
+                  do Output.printString(" player2 wins");
+                  let pl2score = pl2score + 1;
+                }
+
+              if((player1 = 1)& (player2 = 2)){ 
+                  do Output.printString(" player2 wins"); 
+                  let pl2score = pl2score + 1;
+                  }
+
+              if((player1 = 2)&(player2 = 0)){
+                  do Output.printString(" player2 wins");
+                  let pl2score = pl2score + 1;
+                  }
+
+              if((player1 = 1)&(player2 = 0)){
+                  do Output.printString(" player1 wins"); 
+                  let pl1score = pl1score + 1;
+                  }
+              if((player1 = 2)&(player2 = 1)) { 
+                  do Output.printString(" player1 wins");
+                   let pl1score = pl1score+ 1;
+                   }
+              if((player1 = 0)&(player2 = 2)){
+                  do Output.printString("player1 wins"); 
+                  let pl1score = pl1score + 1;
+                  }
+if(player1>2){
+do Output.printString("invalid");
+} 
+if(player2>2){
+do Output.printString("invalid");
+} 
+
+              do Sys.wait(5000);
+              }
+              do Screen.clearScreen();
+              if(pl1score > pl2score){
+                 do Output.println();
+                 do Output.moveCursor(8, 15);
+                 do Output.printString("<------ -Score Summary ----- >");
+                 do Output.println();
+                 do Output.println();
+                 do Output.moveCursor(11, 15);
+                 do Output.printString(" player1 : ");
+                 do Output.printInt(pl1score);
+                 do Output.println();
+                 do Output.println();
+                 do Output.moveCursor(14, 15); do Output.printString(" player2 : ");
+                 do Output.printInt(pl2score);
+                 do Output.println();
+                 do Output.println();
+                 do Output.moveCursor(17, 15);
+                 }
+
+              if(pl2score > pl1score) {
+                do Output.println();
+                do Output.moveCursor(8, 15);
+                do Output.printString(" <--- scroe summary---> ");
+                do Output.println();
+                do Output.println();
+                do Output.moveCursor(11, 15);
+                do Output.printString(" player1 : ");
+                do Output.printInt(pl1score);
+                do Output.println();
+                do Output.println();
+                do Output.moveCursor(14, 15);
+                do Output.printString(" player2 : ");
+                do Output.printInt(pl2score);
+                do Output.println();
+                do Output.println();
+                do Output.moveCursor(17, 15);
+                }
+
+             if(pl1score = pl2score) {
+                do Output.println();
+                do Output.moveCursor(8, 15);
+                do Output.printString("<---Score Summary--->");
+                do Output.println();
+                do Output.println();
+                do Output.moveCursor(11, 15);
+                do Output.printString(" player1 : ");
+                do Output.printInt(pl1score);
+                do Output.println();
+                do Output.println();
+                do Output.moveCursor(14, 15); 
+                do Output.printString(" player2 : "); 
+                do Output.printInt(pl2score );
+                do Output.println();
+                do Output.println();
+                do Output.moveCursor(17, 15);
+                do Output.printString(" Overall it is a tie.");
+            }
+            return;
+    }
+} 
+        
+
+                
+            
+

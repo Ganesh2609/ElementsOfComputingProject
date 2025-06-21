@@ -1,0 +1,357 @@
+class Setup{
+    method void documentation(){
+        do Output.moveCursor(22,6);
+        do Output.printString("Elements of Computing Systems - 2 : Group 14 | PART B");
+        do Output.moveCursor(0,0);
+        return;
+    }
+
+    method int player_computer(){
+        var int check;
+        let check =  Keyboard.readInt("Single Player(1) | Double Player(2) : ");
+        return check;
+    }
+
+    method void draw(){
+        do Screen.setColor(true);
+        do Screen.drawRectangle(156,82,356,92);
+        do Screen.drawRectangle(156,152,356,162);
+        do Screen.drawRectangle(216,22,226,222);
+        do Screen.drawRectangle(286,22,296,222);
+        return; 
+    }
+
+    method void clear_line(){
+        do Screen.setColor(false);
+        do Screen.drawRectangle(0,0,511,10);
+        do Output.moveCursor(0,0);
+        return;
+    }
+
+    method int board(Array arr,int x,int y){
+        var int temp;
+        var Array temp1;
+
+        let temp1 = arr[x];
+        let temp = temp1[y];
+
+        return temp;
+
+    }
+
+    method Array set_board(Array arr,int x,int y,int val){
+        var Array temp;
+
+        let temp = arr[x];
+        let temp[y] = val;
+        let arr[x] = temp;
+
+        return arr;
+    }
+
+    method boolean check(Array arr,int player){
+
+        var int i,j,k;
+        let i=0;
+
+        while(~(i=3)){
+            if(board(arr,i,0) = player){
+                if(board(arr,i,1) = player){
+                    if(board(arr,i,2) = player){
+                        return true;
+                    }
+                }
+            }
+            let i = i+1;
+        }
+
+        let i=0;
+        while(~(i=3)){
+            if(board(arr,0,i) = player){
+                if(board(arr,1,i) = player){
+                    if(board(arr,2,i) = player){
+                        return true;
+                    }
+                }
+            }
+            let i = i+1;
+        }
+
+        if(board(arr,0,0) = player){
+            if(board(arr,1,1) = player){
+                if(board(arr,2,2) = player){
+                    return true;
+                }
+            }
+        }
+
+        if(board(arr,0,2) = player){
+            if(board(arr,1,1) = player){
+                if(board(arr,2,0) = player){
+                    return true;
+                }
+            }
+        }
+
+        let i=0;
+        let k = 0;
+        while(~(i=3)){
+            let j = 0;
+            while(~(j=3)){
+                if(~(board(arr,i,j) = 0)){
+                    let k = k+1;
+                }
+                let j = j+1;
+            }
+            let i = i+1;
+        }
+
+        if(k=9){
+            return true;
+        }
+
+        return false;
+    }
+
+    method void draw_x(int loc){
+
+        var int memAddress,location;
+        let location = location_fn(loc);
+
+        let memAddress = 16384+location;
+        do Memory.poke(memAddress+0, 2);
+        do Memory.poke(memAddress+32, 7);
+        do Memory.poke(memAddress+64, 14);
+        do Memory.poke(memAddress+96, 28);
+        do Memory.poke(memAddress+128, 56);
+        do Memory.poke(memAddress+160, 112);
+        do Memory.poke(memAddress+192, 224);
+        do Memory.poke(memAddress+224, 448);
+        do Memory.poke(memAddress+256, 896);
+        do Memory.poke(memAddress+288, 1792);
+        do Memory.poke(memAddress+320, 3584);
+        do Memory.poke(memAddress+352, 7168);
+        do Memory.poke(memAddress+384, 14336);
+        do Memory.poke(memAddress+416, -4096);
+        do Memory.poke(memAddress+448, -8192);
+        do Memory.poke(memAddress+480, -8192);
+
+        let memAddress = 16384+location+1;
+        do Memory.poke(memAddress+0, 16384);
+        do Memory.poke(memAddress+32, -8192);
+        do Memory.poke(memAddress+64, 28672);
+        do Memory.poke(memAddress+96, 14336);
+        do Memory.poke(memAddress+128, 7168);
+        do Memory.poke(memAddress+160, 3584);
+        do Memory.poke(memAddress+192, 1792);
+        do Memory.poke(memAddress+224, 896);
+        do Memory.poke(memAddress+256, 448);
+        do Memory.poke(memAddress+288, 224);
+        do Memory.poke(memAddress+320, 112);
+        do Memory.poke(memAddress+352, 56);
+        do Memory.poke(memAddress+384, 28);
+        do Memory.poke(memAddress+416, 15);
+        do Memory.poke(memAddress+448, 7);
+        do Memory.poke(memAddress+480, 7);
+
+        let memAddress = 16384+location+(32*16);
+        do Memory.poke(memAddress+0, -8192);
+        do Memory.poke(memAddress+32, -8192);
+        do Memory.poke(memAddress+64, -4096);
+        do Memory.poke(memAddress+96, 14336);
+        do Memory.poke(memAddress+128, 7168);
+        do Memory.poke(memAddress+160, 3584);
+        do Memory.poke(memAddress+192, 1792);
+        do Memory.poke(memAddress+224, 896);
+        do Memory.poke(memAddress+256, 448);
+        do Memory.poke(memAddress+288, 224);
+        do Memory.poke(memAddress+320, 112);
+        do Memory.poke(memAddress+352, 56);
+        do Memory.poke(memAddress+384, 28);
+        do Memory.poke(memAddress+416, 14);
+        do Memory.poke(memAddress+448, 7);
+        do Memory.poke(memAddress+480, 2);
+
+        let memAddress = 16384+location+(32*16)+1	;
+        do Memory.poke(memAddress+0, 7);
+        do Memory.poke(memAddress+32, 7);
+        do Memory.poke(memAddress+64, 15);
+        do Memory.poke(memAddress+96, 28);
+        do Memory.poke(memAddress+128, 56);
+        do Memory.poke(memAddress+160, 112);
+        do Memory.poke(memAddress+192, 224);
+        do Memory.poke(memAddress+224, 448);
+        do Memory.poke(memAddress+256, 896);
+        do Memory.poke(memAddress+288, 1792);
+        do Memory.poke(memAddress+320, 3584);
+        do Memory.poke(memAddress+352, 7168);
+        do Memory.poke(memAddress+384, 14336);
+        do Memory.poke(memAddress+416, 28672);
+        do Memory.poke(memAddress+448, -8192);
+        do Memory.poke(memAddress+480, 16384);
+
+        return;
+    }
+
+    method void draw_o(int loc){   
+
+        var int memAddress,location;
+        let location = location_fn(loc);
+
+        let memAddress = 16384+location;
+        do Memory.poke(memAddress+0, -1024);
+        do Memory.poke(memAddress+32, -256);
+        do Memory.poke(memAddress+64, -128);
+        do Memory.poke(memAddress+96, 8128);
+        do Memory.poke(memAddress+128, 2016);
+        do Memory.poke(memAddress+160, 496);
+        do Memory.poke(memAddress+192, 248);
+        do Memory.poke(memAddress+224, 120);
+        do Memory.poke(memAddress+256, 60);
+        do Memory.poke(memAddress+288, 28);
+        do Memory.poke(memAddress+320, 30);
+        do Memory.poke(memAddress+352, 14);
+        do Memory.poke(memAddress+384, 15);
+        do Memory.poke(memAddress+416, 7);
+        do Memory.poke(memAddress+448, 7);
+        do Memory.poke(memAddress+480, 7);
+
+        let memAddress = 16384+location+1;
+        do Memory.poke(memAddress+0, 63);
+        do Memory.poke(memAddress+32, 255);
+        do Memory.poke(memAddress+64, 511);
+        do Memory.poke(memAddress+96, 1016);
+        do Memory.poke(memAddress+128, 2016);
+        do Memory.poke(memAddress+160, 3968);
+        do Memory.poke(memAddress+192, 7936);
+        do Memory.poke(memAddress+224, 7680);
+        do Memory.poke(memAddress+256, 15360);
+        do Memory.poke(memAddress+288, 14336);
+        do Memory.poke(memAddress+320, 30720);
+        do Memory.poke(memAddress+352, 28672);
+        do Memory.poke(memAddress+384, -4096);
+        do Memory.poke(memAddress+416, -8192);
+        do Memory.poke(memAddress+448, -8192);
+        do Memory.poke(memAddress+480, -8192);
+
+        let memAddress = 16384+location+(32*16);
+        do Memory.poke(memAddress+0, 7);
+        do Memory.poke(memAddress+32, 7);
+        do Memory.poke(memAddress+64, 7);
+        do Memory.poke(memAddress+96, 15);
+        do Memory.poke(memAddress+128, 15);
+        do Memory.poke(memAddress+160, 31);
+        do Memory.poke(memAddress+192, 30);
+        do Memory.poke(memAddress+224, 62);
+        do Memory.poke(memAddress+256, 124);
+        do Memory.poke(memAddress+288, 248);
+        do Memory.poke(memAddress+320, 496);
+        do Memory.poke(memAddress+352, 2016);
+        do Memory.poke(memAddress+384, 8128);
+        do Memory.poke(memAddress+416, -256);
+        do Memory.poke(memAddress+448, -1024);
+        do Memory.poke(memAddress+480, -4096);
+
+        let memAddress = 16384+location+1+(32*16);
+        do Memory.poke(memAddress+0, -8192);
+        do Memory.poke(memAddress+32, -8192);
+        do Memory.poke(memAddress+64, -8192);
+        do Memory.poke(memAddress+96, -4096);
+        do Memory.poke(memAddress+128, -4096);
+        do Memory.poke(memAddress+160, -2048);
+        do Memory.poke(memAddress+192, 30720);
+        do Memory.poke(memAddress+224, 31744);
+        do Memory.poke(memAddress+256, 15872);
+        do Memory.poke(memAddress+288, 7936);
+        do Memory.poke(memAddress+320, 3968);
+        do Memory.poke(memAddress+352, 2016);
+        do Memory.poke(memAddress+384, 1016);
+        do Memory.poke(memAddress+416, 255);
+        do Memory.poke(memAddress+448, 63);
+        do Memory.poke(memAddress+480, 15);
+
+        return;  
+    }
+
+    method int location_fn(int loc){
+
+        var int location;
+
+        if(loc=1){
+            let location = (35*32) + 10;
+        }
+        if(loc=2){
+            let location = (35*32) + 15;
+        }
+        if(loc=3){
+            let location = (35*32) + 19 ;
+        }
+        if(loc=4){
+            let location = (105*32) + 10;
+        }
+        if(loc=5){
+            let location = (105*32) + 15;
+        }
+        if(loc=6){
+            let location = (105*32) + 19;
+        }
+        if(loc=7){
+            let location = (175*32) + 10;
+        }
+        if(loc=8){
+            let location = (175*32) + 15;
+        }
+        if(loc=9){
+            let location = (175*32) + 19;
+        }
+
+        return location;
+    }
+
+    method boolean win(Array arr,int player){
+        var int i,j,k;
+        let i=0;
+
+        while(~(i=3)){
+            if(board(arr,i,0) = player){
+                if(board(arr,i,1) = player){
+                    if(board(arr,i,2) = player){
+                        return true;
+                    }
+                }
+            }
+            let i = i+1;
+        }
+
+        let i=0;
+        while(~(i=3)){
+            if(board(arr,0,i) = player){
+                if(board(arr,1,i) = player){
+                    if(board(arr,2,i) = player){
+                        return true;
+                    }
+                }
+            }
+            let i = i+1;
+        }
+
+        if(board(arr,0,0) = player){
+            if(board(arr,1,1) = player){
+                if(board(arr,2,2) = player){
+                    return true;
+                }
+            }
+        }
+
+        if(board(arr,0,2) = player){
+            if(board(arr,1,1) = player){
+                if(board(arr,2,0) = player){
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
+    }
+}

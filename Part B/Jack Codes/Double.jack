@@ -1,0 +1,103 @@
+    class Double{
+        method void run(){
+            var Array row1,row2,row3;
+            var Array board1;
+            var boolean Game_Over,win1,win2;
+            var int player,location,row,col,i,j,k;
+            var Setup set;
+
+            let Game_Over = false;
+            let player = 1;
+
+            let row1 = Array.new(3);
+            let row2 = Array.new(3);
+            let row3 = Array.new(3);
+            let board1 = Array.new(3);
+
+            let row1[0] = 0;
+            let row1[1] = 0;
+            let row1[2] = 0;
+            let row2[0] = 0;
+            let row2[1] = 0;
+            let row2[2] = 0;
+            let row3[0] = 0;
+            let row3[1] = 0;
+            let row3[2] = 0;
+            let board1[0] = row1;
+            let board1[1] = row2;
+            let board1[2] = row3;
+
+            while(~(Game_Over)){
+                if(player = 1){
+                    let location = Keyboard.readInt("Player X turn (Enter a number between 1 to 9) : ");
+                    do set.clear_line();
+                }
+                else{
+                    let location = Keyboard.readInt("Player o turn (Enter a number between 1 to 9) : ");
+                    do set.clear_line();
+                }
+
+                if((location<10) & (location>0)){
+
+                    let location = location-1;  
+                    let row = location/3;
+                    let col = location - (3  * (location/3));
+
+                    if(set.board(board1,row,col) = 0){
+
+                        let location = location+1;
+                        let board1 = set.set_board(board1,row,col,player);
+
+                        if(player = 1){
+                            do set.draw_x(location);
+                        }
+                        else{
+                            do set.draw_o(location);
+                        }
+
+                        let Game_Over = set.check(board1,player);
+
+                        if(player = 1){
+                            let player = 2;
+                        }
+                        else{
+                            let player = 1;
+                        }
+                    }
+                    else{
+                        do Output.printString("ERROR : The entered location is already used");
+                        do Sys.wait(2000);
+                        do set.clear_line();
+                    }
+
+                }
+                else{
+                    do Output.printString("ERROR : Enter a valid location");
+                    do Sys.wait(2000);
+                    do set.clear_line();
+                }
+            }
+
+            let win1 = set.win(board1,1);
+            let win2 = set.win(board1,2);
+            do Output.printString(" GAME OVER !!!    ");
+
+            do Screen.setColor(false);
+            do Screen.drawRectangle(0,12,511,240);
+            do Output.moveCursor(11,20);
+
+            if(win1){
+                do Output.printString("Player X has won the game");
+                return;
+            }
+
+            if(win2){
+                do Output.printString("Player o has won the game");
+                return;
+            }
+
+            do Output.moveCursor(11,25);
+            do Output.printString("GAME : DRAW");
+            return; 
+        }
+    }

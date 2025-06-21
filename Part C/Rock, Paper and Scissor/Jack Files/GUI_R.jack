@@ -1,0 +1,74 @@
+class GUI_R { 
+    function void draw_R(int player){
+        if (player =  0){
+            do Output.printString(" ROCK");
+            do Output.println();
+            do Output.moveCursor(7, 32);
+            do Output.printString("    ____________");
+            do Output.println();
+            do Output.moveCursor(8, 32);
+            do Output.printString(" __(____| ");
+            do Output.println();
+            do Output.moveCursor(9, 32);
+            do Output.printString("(________)  ");
+            do Output.println();
+            do Output.moveCursor (10, 32);
+            do Output.printString("(________)  ");
+            do Output.println();
+            do Output.moveCursor(11, 32);
+            do Output.printString("(________)  ");
+            do Output.println();
+            do Output.moveCursor(12, 32); 
+            do Output.printString("(_____)______ ");
+            do Output.println();
+        }
+
+        if (player = 1){
+            do Output.printString(" PAPER");
+            do Output.println();
+            do Output.moveCursor(7, 32);
+            do Output.printString("         _________");
+            do Output.println();
+            do Output.moveCursor(8, 32);
+            do Output.printString("    ___(___     |___ ");
+            do Output.println();
+            do Output.moveCursor(9, 32); 
+            do Output.printString(" __(_________) ");
+            do Output.println();
+            do Output.moveCursor(10, 32);
+            do Output.printString("(____________)  ");
+            do Output.println();
+            do Output.moveCursor(11, 32);
+            do Output.printString(" (___________) ");
+            do Output.println();
+            do Output.moveCursor(12, 32);
+            do Output.printString("   (______________________");
+            do Output.println();
+        }
+
+        if (player = 2) {
+            do Output.printString(" SCISSOR");
+            do Output.println();
+            do Output.moveCursor(7, 32);
+            do Output.printString("            _________");
+            do Output.moveCursor(8, 32);
+            do Output.printString(" ________(____     |___");
+            do Output.println();
+            do Output.moveCursor (9, 32);
+            do Output.printString(" (_____________)  ");
+            do Output.println();
+            do Output.moveCursor(10, 32);
+            do Output.printString("    (__________)");
+            do Output.println();
+            do Output.moveCursor(11, 32);
+            do Output.printString("         (_____)");
+            do Output.println();
+            do Output.moveCursor(12, 32);
+            do Output.printString("           (____)_____");
+            do Output.println();
+        }
+ 
+
+        return ;
+    }
+}

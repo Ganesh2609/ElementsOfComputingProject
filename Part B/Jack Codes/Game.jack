@@ -1,0 +1,42 @@
+    class Game{
+        method void go(){
+            var Setup set;
+            var int check;
+            var Single single;
+            var Double double;
+            
+            do Screen.clearScreen();
+            do set.documentation();
+            do set.draw();
+            let check = set.player_computer();
+
+            if(check = 1){
+                do set.clear_line();
+                do single.run();
+            }
+            else{
+                if(check = 2){
+                do set.clear_line();
+                do double.run(); 
+                }
+                else{
+                    do set.clear_line();
+                    do Output.printString("ERROR : Please enter either 1 or 2");
+                    do Sys.wait(2000);
+                    do go();     
+                }
+            }
+
+            do Sys.wait(3500);
+            do Screen.clearScreen();
+            do Output.moveCursor(11,17);
+            do Output.printString("CLICK 'R' TO RESTART THE GAME");
+
+            while(~(Keyboard.keyPressed() = 82)){
+            }
+
+            do go();  
+
+            return;
+        }
+    }   

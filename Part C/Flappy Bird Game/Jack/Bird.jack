@@ -1,0 +1,124 @@
+class Bird{
+field int row;
+field int col;
+field int velocity;
+field int index;
+field int fly;
+field int time;
+field int up;
+field int down;
+
+constructor Bird new(int xP, int yP) {
+      do setbird(xP, yP);
+      return this;
+}
+method int xP() {
+      return col;
+   }
+
+method int yP() {
+      return row;
+}
+
+method void setbird(int xP, int yP) {
+let col = 128; 
+let row = yP;
+let velocity=0;
+let index = ((32*row)+ (col/16));
+let fly = 0;
+let time = 0;
+let down = 1;
+let up = 0;
+return; 
+}
+
+method void jump() {
+let velocity = -4;
+if(down = 1){
+let down = 0; //true
+}
+return;
+}
+
+
+method void updbird(){
+
+let time=time+1;
+
+if (time = 5) {
+	let time = 0;
+	let fly = fly + 1;
+  		if (velocity < 6){
+		let velocity=velocity+1;
+		}
+		if (fly = 4){
+		let fly = 0;
+}
+
+if (down = 0){
+	if( velocity > 0) {
+		if(row < (221-velocity)){
+let row = row +velocity;
+let index = index + (velocity*32);
+}
+}
+else {
+if (row > -velocity){
+let row=row+velocity;
+let index= index+ (velocity*32);
+} else {
+let velocity = 0;
+            }
+         }
+}  else {
+         if (up = 0) {
+		if ((time = 1)) {
+               let row = row - 1;
+               let index = index - 32;
+ if (row < 118)
+ {let up = 1;
+}
+}
+         } else {
+            if ((time = 1)) {
+               let row = row + 1;
+               let index = index + 32;
+            if (row > 138) {let up = 0;}}
+         }
+      }
+     
+   }
+ return;
+}
+
+
+
+method void render() {
+      if (fly = 0) {
+ do Flappy.flappy1(index); }
+      else { 
+if (fly = 1) { 
+do Flappy.flappy2(index); } 
+      else {
+ if (fly = 2) { 
+do Flappy.flappy3(index); } 
+      else {
+ if (fly = 3) { 
+do Flappy.flappy2(index); } 
+      } } }
+      return;
+   }
+
+ method void update() {
+      do updbird();
+      do render();
+      return;
+   }
+
+
+method void dispose(){
+ do Memory.deAlloc(this);
+      return;
+}
+
+}
